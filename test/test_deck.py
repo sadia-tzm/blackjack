@@ -2,6 +2,11 @@ import unittest
 from src.deck import Deck
 import blackjack
 
+# Difficult to use unittest with Tkinter
+# Have not implemented rigorous unit testing
+# When run the command 'python3 -m unittest discover test' - the game runs as
+# normal and opens the GUI window for testing
+
 class DeckTestCase(unittest.TestCase):
 
     async def _start_app(self):
