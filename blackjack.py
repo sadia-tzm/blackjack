@@ -35,15 +35,15 @@ def get_images(card_images):
 # first deal of cards at start of game
 def first_deal():
     hit()
-    dealer_hand.append(deal_card(dealer_cards_frame))
+    dealer_hand.append(deal_card(dealer_frame))
     dealer_score_label.set(score(dealer_hand))
     hit()
 
 # deal single card from top of deck
-def deal_card(frame):
+def deal_card(cards_frame):
     next_card = deck.pop(0)
     deck.append(next_card)
-    tkinter.Label(frame, image=next_card[1], relief="raised").pack(side="left")
+    tkinter.Label(cards_frame, image=next_card[1], relief="raised").pack(side="left")
     return next_card
 
 # score of hand, have to adjust for ace - value either 11 or 1
@@ -66,7 +66,7 @@ def score(hand):
 # Click Hit Button
 def hit():
     # Player gets a new card
-    player_hand.append(deal_card(player_cards_frame))
+    player_hand.append(deal_card(player_frame))
     player_score = score(player_hand)
     player_score_label.set(player_score)
     # If player score is more than 21, player busts, display message box
@@ -80,7 +80,7 @@ def stand():
     # Dealer keeps hitting until reaches 17, special 17 rule for dealer
     dealer_score = score(dealer_hand)
     while 0 < dealer_score < 17:
-        dealer_hand.append(deal_card(dealer_cards_frame))
+        dealer_hand.append(deal_card(dealer_frame))
         dealer_score = score(dealer_hand)
         dealer_score_label.set(dealer_score)
 
@@ -111,16 +111,16 @@ def stand():
 def new_game():
     global dealer_hand
     global player_hand
-    global dealer_cards_frame
-    global player_cards_frame
+    global dealer_frame
+    global player_frame
 
     # clears old game, clears player and dealer cards
-    dealer_cards_frame.destroy()
-    dealer_cards_frame = tkinter.Frame(cards_frame, bg="green")
-    dealer_cards_frame.grid(row=0, column=1, rowspan=2, sticky='ew')
-    player_cards_frame.destroy()
-    player_cards_frame = tkinter.Frame(cards_frame, bg="green")
-    player_cards_frame.grid(row=2, column=1, rowspan=2, sticky='ew')
+    dealer_frame.destroy()
+    dealer_frame = tkinter.Frame(game_frame, bg="green")
+    dealer_frame.grid(row=0, column=1, rowspan=2, sticky='ew')
+    player_frame.destroy()
+    player_frame = tkinter.Frame(game_frame, bg="green")
+    player_frame.grid(row=2, column=1, rowspan=2, sticky='ew')
 
     # resets title box and player hands, deals new cards
     winner_text.set("Blackjack")
@@ -149,27 +149,27 @@ winner_text.set("Blackjack")
 title = tkinter.Label(window, textvariable=winner_text, font="Montserrat", padx=10, pady=6, bg="yellow")
 title.grid(row=0, column=0, columnspan=3, pady=5)
 
-# Cards Frame
-cards_frame = tkinter.Frame(window, bg="green")
-cards_frame.grid(row=1, column=0, columnspan=3, rowspan=2, sticky='ew', pady=8)
+# Game Frame
+game_frame = tkinter.Frame(window, bg="green")
+game_frame.grid(row=1, column=0, columnspan=3, rowspan=2, sticky='ew', pady=8)
 
 # Dealer Labels
 dealer_score_label = tkinter.IntVar()
-tkinter.Label(cards_frame, text="  Dealer  ", bg="green", fg="white", font="Montserrat").grid(row=0, column=0)
-tkinter.Label(cards_frame, textvariable=dealer_score_label, bg="green", fg="white", font="Montserrat").grid(row=1, column=0)
+tkinter.Label(game_frame, text="  Dealer  ", bg="green", fg="white", font="Montserrat").grid(row=0, column=0)
+tkinter.Label(game_frame, textvariable=dealer_score_label, bg="green", fg="white", font="Montserrat").grid(row=1, column=0)
 
 # Dealer Cards Frame
-dealer_cards_frame = tkinter.Frame(cards_frame, bg="green")
-dealer_cards_frame.grid(row=0, column=1, rowspan=2, sticky='ew')
+dealer_frame = tkinter.Frame(game_frame, bg="green")
+dealer_frame.grid(row=0, column=1, rowspan=2, sticky='ew')
 
 # Player Labels
 player_score_label = tkinter.IntVar()
-tkinter.Label(cards_frame, text="  Player  ", bg="green", fg="white", font="Montserrat").grid(row=2, column=0)
-tkinter.Label(cards_frame, textvariable=player_score_label, bg="green", fg="white", font="Montserrat").grid(row=3, column=0)
+tkinter.Label(game_frame, text="  Player  ", bg="green", fg="white", font="Montserrat").grid(row=2, column=0)
+tkinter.Label(game_frame, textvariable=player_score_label, bg="green", fg="white", font="Montserrat").grid(row=3, column=0)
 
 # Player Cards Frame
-player_cards_frame = tkinter.Frame(cards_frame, bg="green")
-player_cards_frame.grid(row=2, column=1, rowspan=2, sticky='ew')
+player_frame = tkinter.Frame(game_frame, bg="green")
+player_frame.grid(row=2, column=1, rowspan=2, sticky='ew')
 
 # Buttons Frame
 buttons_frame = tkinter.Frame(window)
@@ -196,8 +196,8 @@ deck = list(cards)
 shuffle()
 
 # Set up hands
-dealer_hand = []
 player_hand = []
-    
+dealer_hand = []
+
 if __name__ == '__main__':
     play()
