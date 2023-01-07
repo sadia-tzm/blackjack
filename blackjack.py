@@ -72,7 +72,7 @@ def hit():
     # If player score is more than 21, player busts, display message box
     if player_score > 21:
         winner_text.set("Player Busts! Dealer Wins!")
-        messagebox.showinfo("You Lose!", "Player Busts! You Lose")
+        messagebox.showinfo("Result", "Player Busts! You Lose.")
         new_game()
 
 # Click Stand Button
@@ -88,23 +88,23 @@ def stand():
     player_score = score(player_hand)
     if player_score > 21:
         winner_text.set("Dealer Wins!")
-        messagebox.showinfo("You Lose!", "Dealer Wins! You Lose")
+        messagebox.showinfo("Result", "Dealer Wins! You Lose.")
         new_game()
     elif dealer_score > 21:
         winner_text.set("Dealer Busts! Player Wins!")
-        messagebox.showinfo("You Win!", "Dealer Busts! You Win")
+        messagebox.showinfo("Result", "Dealer Busts. You Win!")
         new_game()
     elif dealer_score < player_score:
         winner_text.set("Player Wins!")
-        messagebox.showinfo("You Win!", "You Win!")
+        messagebox.showinfo("Result", "You Win!")
         new_game()
     elif dealer_score > player_score:
         winner_text.set("Dealer Wins!")
-        messagebox.showinfo("You Lose!", "You Lose")
+        messagebox.showinfo("Result", "You Lose.")
         new_game()
     else:
         winner_text.set("Draw!")
-        messagebox.showinfo("Draw!", "Draw")
+        messagebox.showinfo("Result", "Draw.")
         new_game()
 
 # Set up a new game
@@ -131,10 +131,10 @@ def new_game():
 # Shuffle the deck
 def shuffle():
     random.shuffle(deck)
-    
+
 # Setting up tkinter window and frames for GUI
 window = tkinter.Tk()
-window.title("Blackjack!")
+window.title("Blackjack")
 window.geometry("800x560")
 window.configure(bg="green") 
 
