@@ -1,6 +1,7 @@
 import tkinter
 from PIL import Image, ImageTk
 from tkinter import messagebox
+import random
 
 # To start game, deal first cards and start tkinter window
 def play():
@@ -127,6 +128,10 @@ def new_game():
     player_hand = []
     first_deal()
 
+# Shuffle the deck
+def shuffle():
+    random.shuffle(deck)
+    
 # Setting up tkinter window and frames for GUI
 window = tkinter.Tk()
 window.title("Blackjack!")
@@ -187,6 +192,8 @@ cards = []
 get_images(cards)
 print(cards)
 deck = list(cards)
+# Shuffle the deck before beginning
+shuffle()
 
 # Set up hands
 dealer_hand = []
